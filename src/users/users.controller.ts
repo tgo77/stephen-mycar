@@ -18,9 +18,12 @@ import { UserDto } from './dtos/user.dto';
 import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
+import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
+import { User } from './user.entity';
 
 @Controller('auth')
 @Serialize(UserDto)
+// @UseInterceptors(CurrentUserInterceptor) // 다른방법변경 
 export class UsersController {
   constructor(
     private usersService: UsersService,
@@ -37,7 +40,7 @@ export class UsersController {
   // }
 
   @Get('/whoami')
-  whoAmI(@CurrentUser() user: any) {
+  whoAmI(@CurrentUser() user: User) {
     return user;
   }
 

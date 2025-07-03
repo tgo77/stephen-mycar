@@ -1,5 +1,9 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
+/**
+ *
+ *
+ */
 export const CurrentUser = createParamDecorator(
   (data: never, context: ExecutionContext) => {
     // console.log('====================================');
@@ -7,8 +11,7 @@ export const CurrentUser = createParamDecorator(
     // console.log(context);
     // console.log('====================================');
     const request = context.switchToHttp().getRequest();
-    console.log('====================================');
-    console.log(request.session.userId);
-    console.log('====================================');
+    // 인터셉터에서 넘겨준 사용자 정보를 반환
+    return request.currentUser;
   },
 );
