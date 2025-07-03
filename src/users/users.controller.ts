@@ -5,6 +5,7 @@ import {
   NotFoundException,
   Param,
   Query,
+  Session,
 } from '@nestjs/common';
 import { Post, Get, Patch, Delete } from '@nestjs/common';
 import { UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
@@ -29,15 +30,34 @@ export class UsersController {
     console.log('====================================');
   }
 
+  @Get('/whoami')
+  whoami(@Session() session: any) {
+    return this.usersService.findOne(session.userId);
+  }
+
   @Post('/signup')
-  createUser(@Body() user: CreateUserDto) {
-    console.log(user);
-    return this.authService.signup(user.email, user.password);
+  async createUser(@Body() createDto: CreateUserDto, @Session() session: any) {
+    const user = await this.authService.signup(
+      createDto.email,
+      createDto.password,
+    );
+    session.userId = user.id;
+    return user;
   }
 
   @Post('/signin')
-  signin(@Body() user: CreateUserDto) {
-    return this.authService.signin(user.email, user.password);
+  async signin(@Body() createDto: CreateUserDto, @Session() session: any) {
+    const user = await this.authService.signin(
+      createDto.email,
+      createDto.password,
+    );
+    session.userId = user.id;
+    return user;
+  }
+
+  @Post('/signout')
+  signout(@Session() session: any) {
+    session.userId = null;
   }
 
   //   @UseInterceptors(new SerializeInterceptor(UserDto))

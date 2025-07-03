@@ -4,7 +4,7 @@ POST  http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "tgo77@email.com",
+    "email": "dev001@email.com",
     "password": "1234"
 }
 
@@ -16,6 +16,14 @@ Content-Type: application/json
     "email": "tgo77@email.com",
     "password":"1234"
 }
+
+
+### WHO AM I 
+GET http://localhost:3000/auth/whoami
+
+### SING OUT
+POST http://localhost:3000/auth/signout
+
 
 
 ### Find a particular user with a given ID

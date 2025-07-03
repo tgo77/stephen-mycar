@@ -42,3 +42,11 @@
 ## INTERCEPTOR
 
 **intercept(`context`:ExecutionContext, `next`:CallHandler)**
+
+
+
+## COOKIE SESSION
+- npm install cookie-session
+- npm install @types/cookie-session
+
+
