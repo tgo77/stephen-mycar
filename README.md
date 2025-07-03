@@ -1,39 +1,44 @@
 # my car
 
 ###
+
 - nest new mycar
 
-### module 
+### module
+
 - nest g moudle users
 - nest g module reports
-a
+  a
+
 ### controller
+
 - nest g controller users
 - nest g controller reports
 
 ### services
+
 - nest g service users
 - nest g service reports
 
 ## repository
-- npm i @nestjs/typeorm 
+
+- npm i @nestjs/typeorm
 - npm i typeorm
 - npm i sqlite3
 
 ### entity 구성
-1) user.entity.ts 파일 생성 
-    + 필드추가 
-2) user.module.ts 파일에 imports 구성 
-    + imports: [
-        TypeOrmModule.forFeature([
-            User
-        ])
-    ]
-3) app.module.ts 파일에서 forRoot 의 entities : 구성 
-    + entities: [User]
 
+1. user.entity.ts 파일 생성
+   - 필드추가
+2. user.module.ts 파일에 imports 구성
+   - imports: [
+     TypeOrmModule.forFeature([
+     User
+     ])
+     ]
+3. app.module.ts 파일에서 forRoot 의 entities : 구성
+   - entities: [User]
 
+## INTERCEPTOR
 
-
-
-
+**intercept(`context`:ExecutionContext, `next`:CallHandler)**
