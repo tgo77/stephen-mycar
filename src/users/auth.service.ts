@@ -13,9 +13,9 @@ const scrypt = promisify(_scrypt);
 @Injectable()
 export class AuthService {
   constructor(private usersService: UsersService) {
-    console.log('====================================');
-    console.log(this.usersService);
-    console.log('====================================');
+    // console.log('====================================');
+    // console.log(this.usersService);
+    // console.log('====================================');
   }
 
   /**
@@ -29,6 +29,7 @@ export class AuthService {
     if (users.length) {
       throw new BadRequestException(`email in use`);
     }
+    
     // 해시
     const salt = randomBytes(8).toString('hex');
     const hash = (await scrypt(password, salt, 32)) as Buffer;
