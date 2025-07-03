@@ -6,6 +6,7 @@ import {
   Param,
   Query,
   Session,
+  UseGuards,
 } from '@nestjs/common';
 import { Post, Get, Patch, Delete } from '@nestjs/common';
 import { UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
@@ -20,10 +21,11 @@ import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
 import { User } from './user.entity';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller('auth')
 @Serialize(UserDto)
-// @UseInterceptors(CurrentUserInterceptor) // 다른방법변경 
+// @UseInterceptors(CurrentUserInterceptor) // 다른방법변경
 export class UsersController {
   constructor(
     private usersService: UsersService,
@@ -39,6 +41,7 @@ export class UsersController {
   //   return this.usersService.findOne(session.userId);
   // }
 
+  @UseGuards(AuthGuard)
   @Get('/whoami')
   whoAmI(@CurrentUser() user: User) {
     return user;
