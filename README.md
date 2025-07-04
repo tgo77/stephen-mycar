@@ -50,3 +50,12 @@
 - npm install @types/cookie-session
 
 
+## CONFIG 
+-  npm install @nestjs/config
+- npm install cross-env
+
+
+
+
+
+
