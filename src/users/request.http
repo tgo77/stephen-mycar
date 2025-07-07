@@ -4,8 +4,8 @@ POST  http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "dev001@email.com",
-    "password": "1234"
+    "email": "admin@incon.kr",
+    "password": "1230"
 }
 
 ### Sign in 

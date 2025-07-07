@@ -1,0 +1,23 @@
+### create report
+POST  http://localhost:3000/reports
+Content-Type: application/json
+
+{
+    "make":"제네시스",
+    "model":"GV80",
+    "year":2025,
+    "mileage": 10,
+    "lng":0,
+    "lat": 0,
+    "price": 1000
+}
+
+
+### PATCH APPROVE
+PATCH http://localhost:3000/reports/3
+Content-Type: application/json
+
+{
+
+    "approved": false
+}
