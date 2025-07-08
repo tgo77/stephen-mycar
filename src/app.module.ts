@@ -17,6 +17,8 @@ import { User } from './users/user.entity';
 import { Report } from './reports/report.entity';
 import dbConfig from '../ormconfig.js';
 import { typeOrmAsyncConfig } from './config/typeorm.config';
+import { GatewayModule } from './gateway/gateway.module';
+import { SocketModule } from './socket/socket.module';
 
 @Module({
   imports: [
@@ -46,6 +48,8 @@ import { typeOrmAsyncConfig } from './config/typeorm.config';
     // }),
     UsersModule,
     ReportsModule,
+    GatewayModule,
+    SocketModule,
   ],
   controllers: [AppController],
   providers: [

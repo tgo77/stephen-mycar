@@ -64,3 +64,9 @@
 
    npm run typeorm migration:generate -- -n initial-schema -o
 ```
+
+## WEB SOCKET'S
+
+```sh
+$ npm i --save @nestjs/websockets @nestjs/platform-socket.io
+```
