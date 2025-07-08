@@ -25,6 +25,7 @@ switch (process.env.NODE_ENV) {
         type: 'sqlite',
         database: 'test.sqlite',
         entities: ['**/*.js'],
+        migrationRun: true,
       });
     }
     break;

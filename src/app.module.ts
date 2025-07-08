@@ -16,6 +16,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from './users/user.entity';
 import { Report } from './reports/report.entity';
 import dbConfig from '../ormconfig.js';
+import { typeOrmAsyncConfig } from './config/typeorm.config';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import dbConfig from '../ormconfig.js';
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
-    TypeOrmModule.forRoot(dbConfig),
+    TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
 
     // TypeOrmModule.forRootAsync({
     //   inject: [ConfigService],

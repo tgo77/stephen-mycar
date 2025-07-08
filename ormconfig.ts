@@ -1,7 +1,14 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
 
 const dbConfig = {
   synchronize: false,
+  migrationsTableName: 'migrations',
+  migrations: ['src/migrations/*'],
+  migrationsRun: true,
+  cli: {
+    migrationsDir: 'migrations',
+  },
 };
 
 switch (process.env.NODE_ENV) {
@@ -19,13 +26,16 @@ switch (process.env.NODE_ENV) {
       type: 'sqlite',
       database: 'test.sqlite',
       entities: ['**/*.entity.ts'],
+      migrationRun: true,
     });
   }
 }
 
-const config: TypeOrmModuleOptions = {};
+const config = {
+  ...dbConfig,
+};
 console.log('====================================');
-console.log(dbConfig);
+console.log(config);
 console.log('====================================');
 
-export = dbConfig;
+export default config;

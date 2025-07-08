@@ -43,19 +43,24 @@
 
 **intercept(`context`:ExecutionContext, `next`:CallHandler)**
 
-
-
 ## COOKIE SESSION
+
 - npm install cookie-session
 - npm install @types/cookie-session
 
+## CONFIG
 
-## CONFIG 
--  npm install @nestjs/config
+- npm install @nestjs/config
 - npm install cross-env
 
+### migration
+
+- "typeorm": "cross-env NODE_ENV=development typeorm-ts-node-esm"
+
+```sh
+ ts-node ./node_modules/typeorm/cli.js migration:generate src/migrations/created-user -d src/data-source.ts
 
 
 
-
-
+   npm run typeorm migration:generate -- -n initial-schema -o
+```
