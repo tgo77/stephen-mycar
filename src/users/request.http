@@ -4,7 +4,7 @@ POST  http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "dev1@incon.kr",
+    "email": "admin@incon.kr",
     "password": "1230"
 }
 
@@ -18,6 +18,22 @@ Content-Type: application/json
 }
 
 
+### LOGIN 
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "admin@incon.kr",
+    "password":"1230"
+}
+
+
+### GET STATUS
+GET http://localhost:3000/auth/status
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBpbmNvbi5rciIsImFkbWluIjpmYWxzZSwiaWF0IjoxNzUyMDM5ODM0LCJleHAiOjE3NTIwNDM0MzR9.QpI8G9Dij9JvY1u3AtpnJp3TIETm4PcF4rKeFSBzZi0
+
+
+
 ### WHO AM I 
 GET http://localhost:3000/auth/whoami
 
@@ -26,7 +42,7 @@ POST http://localhost:3000/auth/signout
 
 
 
-### Find a particular user with a given ID
+### findUser
 GET http://localhost:3000/auth/1
 
 ### Find all  users with a given Email

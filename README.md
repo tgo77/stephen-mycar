@@ -70,3 +70,14 @@
 ```sh
 $ npm i --save @nestjs/websockets @nestjs/platform-socket.io
 ```
+
+## JWT
+
+- npm install @nestjs/jwt
+- npm install @nestjs/passport
+- npm install passport
+- npm install passport-jwt
+- npm install passport-local
+<!--  -->
+- npm i -D @types/passport-jwt
+- npm i -D @types/passport-local

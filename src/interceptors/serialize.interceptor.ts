@@ -19,22 +19,27 @@ export const Serialize = (dto: ClassConstructor) => {
 
 export class SerializeInterceptor implements NestInterceptor {
   constructor(private dto: any) {}
-0
+
   intercept(
     context: ExecutionContext,
     handler: CallHandler<any>,
   ): Observable<any> | Promise<Observable<any>> {
+    const request = context.switchToHttp().getRequest();
+    //const response = context.switchToHttp().getResponse();
     // console.log('====================================');
     // console.log('01', context);
     // console.log('02', handler);
     // console.log('====================================');
+    console.log('====================================');
+    console.log(`SerializeInterceptor::intercept()`, request.user);
+    console.log('====================================');
 
     return handler.handle().pipe(
       map((data: any) => {
         console.log('====================================');
         console.log('03', data);
         console.log('====================================');
-
+        // response.setHeader('Authorization', 'Bearer ' + data);
         return plainToClass(this.dto, data, {
           excludeExtraneousValues: true,
         });

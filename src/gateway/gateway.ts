@@ -1,11 +1,12 @@
 import { OnModuleInit } from '@nestjs/common';
 import {
+  ConnectedSocket,
   MessageBody,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { Server } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 
 @WebSocketGateway({
   cors: {
@@ -30,8 +31,9 @@ export class MyCarGateway implements OnModuleInit {
   }
 
   @SubscribeMessage(`newMessage`)
-  onNewMessage(@MessageBody() message: any) {
+  onNewMessage(@MessageBody() message: any, @ConnectedSocket() client: Socket) {
     console.log('====================================');
+    console.log(client.id);
     console.log(message);
     console.log('====================================');
 

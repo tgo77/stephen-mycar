@@ -63,12 +63,12 @@ import { SocketModule } from './socket/socket.module';
   ],
 })
 export class AppModule {
-  constructor() {}
+  constructor(private _config: ConfigService) {}
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(
         cookieSession({
-          keys: ['keys'],
+          keys: [this._config.get<string>('COOKIE_KEY')],
         }),
       )
       .forRoutes('*');

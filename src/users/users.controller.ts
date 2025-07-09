@@ -5,6 +5,8 @@ import {
   NotFoundException,
   Param,
   Query,
+  Req,
+  Res,
   Session,
   UseGuards,
 } from '@nestjs/common';
@@ -22,6 +24,12 @@ import { CurrentUser } from './decorators/current-user.decorator';
 import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
 import { User } from './user.entity';
 import { AuthGuard } from '../guards/auth.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { RoleGuard } from 'src/guards/roles.guard';
+import { AuthPayloadDto } from './dtos/auth-payload.dto';
+import { LocalGuard } from 'src/guards/local.guard';
+import { JwtAuthGuard } from 'src/guards/jwt.guard';
+import { Request, Response } from 'express';
 
 @Controller('auth')
 @Serialize(UserDto)
@@ -75,6 +83,8 @@ export class UsersController {
   //   @UseInterceptors(new SerializeInterceptor(UserDto))
   //   @Serialize(UserDto)
   @Get('/:id')
+  @Roles(['ADMIN', 'MANAGER']) // AND 조건
+  @UseGuards(RoleGuard)
   async findUser(@Param('id') id: string) {
     const user = await this.usersService.findOne(parseInt(id));
     if (!user) {
@@ -103,5 +113,29 @@ export class UsersController {
       throw new BadRequestException(``);
     }
     return this.usersService.remove(parseInt(id));
+  }
+
+  @Post('/login')
+  @UseGuards(LocalGuard)
+  // async login(@Body() { username, password }: AuthPayloadDto) {
+  async login(@Req() req: Request) {
+    // const token = await this.authService.validateUser({ username, password });
+    // return token;
+    console.log('====================================');
+    console.log(`login()`, req.user);
+    console.log('====================================');
+
+    // res.setHeader('Authorization', 'Bearer ' + req.user);
+    return req.user;
+  }
+
+  @Get('profile')
+  @UseGuards(JwtAuthGuard)
+  profile(@Req() req: Request) {
+    console.log('====================================');
+    console.log(req.user);
+    console.log('====================================');
+
+    return req.user;
   }
 }
