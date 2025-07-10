@@ -13,12 +13,14 @@ import { ReportsModule } from './reports/reports.module';
 
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-import { User } from './users/user.entity';
+import { User } from './users/entities/user.entity';
 import { Report } from './reports/report.entity';
 import dbConfig from '../ormconfig.js';
 import { typeOrmAsyncConfig } from './config/typeorm.config';
 import { GatewayModule } from './gateway/gateway.module';
 import { SocketModule } from './socket/socket.module';
+// import { TypeOrmExModule } from './repositories/typeorm-ex.module';
+import { UserAuthorityRepository } from './users/repositories/user-authority.repository';
 
 @Module({
   imports: [
@@ -27,7 +29,6 @@ import { SocketModule } from './socket/socket.module';
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
     TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
-
     // TypeOrmModule.forRootAsync({
     //   inject: [ConfigService],
     //   useFactory: (config: ConfigService) => {
@@ -46,6 +47,7 @@ import { SocketModule } from './socket/socket.module';
     //   entities: [User, Report],
     //   synchronize: true,
     // }),
+    // TypeOrmExModule.forCustomRepository([UserAuthorityRepository]),
     UsersModule,
     ReportsModule,
     GatewayModule,
@@ -61,6 +63,7 @@ import { SocketModule } from './socket/socket.module';
       }),
     },
   ],
+  // exports: [TypeOrmModule],
 })
 export class AppModule {
   constructor(private _config: ConfigService) {}

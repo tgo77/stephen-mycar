@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { classToPlain, plainToClass } from 'class-transformer';
+import { classToPlain, plainToClass, plainToInstance } from 'class-transformer';
 import { UserDto } from 'src/users/dtos/user.dto';
 
 interface ClassConstructor {
@@ -40,7 +40,7 @@ export class SerializeInterceptor implements NestInterceptor {
         console.log('03', data);
         console.log('====================================');
         // response.setHeader('Authorization', 'Bearer ' + data);
-        return plainToClass(this.dto, data, {
+        return plainToInstance(this.dto, data, {
           excludeExtraneousValues: true,
         });
       }),

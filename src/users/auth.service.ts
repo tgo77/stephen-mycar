@@ -54,6 +54,7 @@ export class AuthService {
       id: user.id,
       email: user.email,
       admin: user.admin,
+      authorities: user.authorities?.map((a) => a.authorityName),
     });
   };
 

@@ -22,7 +22,7 @@ import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
-import { User } from './user.entity';
+import { User } from './entities/user.entity';
 import { AuthGuard } from '../guards/auth.guard';
 import { Roles } from 'src/decorators/roles.decorator';
 import { RoleGuard } from 'src/guards/roles.guard';

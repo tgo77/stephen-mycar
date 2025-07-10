@@ -1,7 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { AfterInsert, AfterUpdate, AfterRemove } from 'typeorm';
 import { OneToMany } from 'typeorm';
-import { Report } from '../reports/report.entity';
+import { Report } from '../../reports/report.entity';
+import { UserAuthority } from './user-authority.entity';
 //import { Exclude } from 'class-transformer';
 
 @Entity()
@@ -21,6 +22,11 @@ export class User {
 
   @OneToMany(() => Report, (report) => report.user)
   reports: Report[];
+
+  @OneToMany((type) => UserAuthority, (userAuthority) => userAuthority.user, {
+    eager: true,
+  })
+  authorities?: any[];
 
   @AfterInsert()
   logInsert = () => {
